@@ -1,7 +1,9 @@
 from registry.models import Person, PhoneNumber, Address
+from registry.decorators import log_function_run_time
 
 class RegistryService():
     
+    @log_function_run_time
     @staticmethod
     def create_person_from_serialized_data(serialized_data):
         phone_numbers_data = serialized_data.pop('phone_numbers')
@@ -16,6 +18,7 @@ class RegistryService():
         
         return person
     
+    @log_function_run_time
     @staticmethod
     def update_person_from_serialized_data(person, serialized_data):
         phone_numbers_data = serialized_data.pop('phone_numbers')
