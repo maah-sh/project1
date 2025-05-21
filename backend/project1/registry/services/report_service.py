@@ -35,27 +35,4 @@ class ReportService():
             )
         )
 
-        result = {}
-        for month in range(1, 13):
-            result[month] = {
-                'total_count': 0,
-                'weeks': {
-                    1: {'male_count': 0, 'female_count': 0},
-                    2: {'male_count': 0, 'female_count': 0},
-                    3: {'male_count': 0, 'female_count': 0},
-                    4: {'male_count': 0, 'female_count': 0},
-                }
-            }
-            
-        for item in registraions_by_month_and_week:
-            month = item['month']
-            week = item['week']
-
-            result[month]['total_count'] += item['total_count']
-
-            result[month]['weeks'][week] = {
-                'male_count': item['male_count'],
-                'female_count': item['female_count'],
-            }
-
-        return result
+        return registraions_by_month_and_week

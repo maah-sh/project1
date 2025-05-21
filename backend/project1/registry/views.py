@@ -4,7 +4,7 @@ from rest_framework.response import Response
 
 
 from .models import Person
-from .serializers import PersonSerializer
+from .serializers import PersonSerializer, RegistrationDateReportSerializer
 from registry.services.report_service import ReportService
 
 
@@ -15,8 +15,9 @@ class PersonViewSet(viewsets.ModelViewSet):
 
 class RegistrationDateReportView(APIView):
     def get(self, request, year):
-        registration_date_report = ReportService.count_of_registrations_by_month_and_week(year)
-        return Response(registration_date_report)
+        registrations_by_month_and_week = ReportService.count_of_registrations_by_month_and_week(year)
+        serializer = RegistrationDateReportSerializer(registrations_by_month_and_week)
+        return Response(serializer.data)
     
 
 class GenderReportView(APIView):

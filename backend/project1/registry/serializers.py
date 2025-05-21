@@ -35,6 +35,26 @@ class PersonSerializer(serializers.ModelSerializer):
         
 
 
+class RegistrationDateReportSerializer(serializers.BaseSerializer):
+    def to_representation(self, instance):
+        representation = {
+            month: {
+                'total_count': 0,
+                'weeks': {week : {'male_count': 0, 'female_count': 0} for week in range(1, 5)}
+            } for month in range(1,13)
+        }
+            
+        for item in instance:
+            month = item.get('month')
+            week = item.get('week')
+            representation[month]['total_count'] += item.get('total_count', 0)
+            representation[month]['weeks'][week] = {
+                'male_count': item.get('male_count', 0),
+                'female_count': item.get('female_count', 0),
+            }
+        
+        return representation
+
 
 
 
