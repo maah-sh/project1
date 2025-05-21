@@ -1,5 +1,5 @@
 from django.db import models
-import jdatetime
+from registry.services.date_service import convert_to_jalali_date
 
 
 class Person(models.Model):
@@ -19,7 +19,7 @@ class Person(models.Model):
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
 
-        jalali_registration_date = jdatetime.date.fromgregorian(date=self.registration_date)
+        jalali_registration_date = convert_to_jalali_date(self.registration_date)
 
         JalaliRegistrationDate.objects.update_or_create(
             person=self,
