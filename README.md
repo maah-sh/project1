@@ -1,5 +1,5 @@
 # About The Project
-A full-stack simple registry system with registration and reporting features, built for a job interview using Django REST Framework and Vue.js.
+A full-stack simple registry system with registration and reporting features, using Django REST Framework and Vue.js.
 
 
 # Getting Started
